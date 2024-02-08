@@ -37,6 +37,4 @@
   GitHub username: mbrown50
 
   GitHub Repo: htts://github.com/mbrown50
-
-  Additional questions? Email: 
-
+  https://github.com/mbrown50/my-README-create
