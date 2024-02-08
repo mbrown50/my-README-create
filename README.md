@@ -4,7 +4,7 @@
   # Description
   A command-line application that dynamically generates a professional README.md file
 
-  ## Table of Conents
+  ## Table of Contents
   [Description](#description) | [Installation](#installation) | [Usage](#usage) | [License](#license) | [Contributing](#contributing) | [Tests](#tests) | [Questions](#questions)
 
   ## Installation
