@@ -1,63 +1,87 @@
-// TODO: Include packages needed for this application
+// Include packages needed for this application
 
 // to know it's from a file and not a package needs "./"
 const generateMarkdown = require('./utils/generateMarkdown')
-
-const inquier = require('inquirer');
+const inquirer = require('inquirer');
 const fs = require('fs');
 const { type } = require('os');
 const { error } = require('console');
 
-// TODO: Create an array of questions for user input
-const questions = {
-    type: 'input',
-    message: 'Answer the quesitons:',
-    name: 'answer'
-};
+// Create an array of questions for user input
+const questions = [
+    {
+        type: 'input',
+        message: 'Enter title:',
+        name: 'title',
+    },
+    {
+        type: 'input',
+        message: 'Enter description:',
+        name: 'description',
+    },
+    {
+        type: 'input',
+        message: 'Info on installation:',
+        name: 'installation',
+    },
+    {
+        type: 'input',
+        message: 'Info on usage:',
+        name: 'usage',
+    },
+    {
+        type: 'list',
+        message: 'Choose license:',
+        choices: ['MIT', 'GPL v3', 'MPL 2.0','other',''],
+        name: 'license',
+    },
+    {
+        type: 'input',
+        message: 'Info on contributing:',
+        name: 'contributing',
+    },
+    {
+        type: 'input',
+        message: 'Info on tests:',
+        name: 'tests',
+    },
+    {
+        type: 'input',
+        message: 'Enter email:',
+        name: 'email',
+    },
+    {
+        type: 'input',
+        message: 'Enter GitHub username:',
+        name: 'username',
+    },
+    {
+        type: 'input',
+        message: 'Enter deployed site:',
+        name: 'deployed',
+    },
 
-// TODO: Create a function to write README file
+]
+
+// Create a function to write README file
 function writeToFile(fileName, data) {
-    // save file to disk
-
+    // save file to disk 
+    fs.writeFile(fileName, generateMarkdown(data), (err) => { 
+        // In case of a error throw err.
+        err ? console.error(err) : console.log('Success! README.md file created.')
+    });
 }
 
-// TODO: Create a function to initialize app
+// Create a function to initialize app
 function init() {
+    const filename = 'README.md';
     // ask questions using inquierer
-    // use questions array from above
-
-    // mock object that you will create later
-    const mockAnswer = {
-        title: 'hi',
-        description: 'stuff',
-        license: 'MIT'
-    };
-
-    const readme = generateMarkdown(mockAnswer);
-
-    console.log(readme);
-    
-    /*
-    console.log(generateMarkdown(
-        {'title': 'hi', description: 'stuff'}
-        )
-    */
-    
-    // or does this go into the above writeToFile funciton??
-   /* inquirer.prompt(questions)
-        .then (data => {
-            // call generateMarkdown function
-            fs.writeFile('text.txt', JSON.stringify(data, null, 4),  // 4 indenting
-            err => err ? console.error(err) : console.log(err);
-        }
-    // once the questions are answered, generate the readme file and save to disk
-    // use writeToFile function above
-    
-    let readme = getBigLongSting();
-    wreitetofile(readme);
-    console.log('done!')
-    */
+    inquirer.prompt(questions)
+        .then(data => {
+            writeToFile(filename, data);
+        })
 }
 
 // Function call to initialize app
 init();
+
